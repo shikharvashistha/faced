@@ -46,12 +46,12 @@ jobs:
           msystem: ${{matrix.sys}}
           update: true
           install: mingw-w64-${{matrix.env}}-toolchain
-      - name: Packages for Windows
+      - name: MSYS2 packages for Windows
         if: matrix.platform == 'windows-latest'
         uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
-          install: gcc dlib
+          install: mingw-w64-${{matrix.env}}-dlib mingw-w64-${{matrix.env}}-gcc
       - name: Verification
         working-directory: src/
         run: go mod verify
