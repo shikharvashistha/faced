@@ -43,9 +43,9 @@ jobs:
       - name: Verification
         working-directory: src/
         run: go mod verify
-      - name: Run
-        working-directory: src/
-        run: go run main.go
+      #- name: Run
+       # working-directory: src/
+       # run: go run main.go
       - name: Build
         working-directory: src/
         run: go build main.go
