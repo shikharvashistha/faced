@@ -17,7 +17,7 @@ jobs:
         platform:
           - ubuntu-latest
           - macos-latest
-          #- windows-latest
+          - windows-latest
         include:
          - { sys: mingw64, env: x86_64 }
          - { sys: mingw32, env: i686 }
@@ -45,7 +45,7 @@ jobs:
         with:
           msystem: ${{matrix.sys}}
           update: true
-          install: mingw-w64-${{matrix.env}}-gcc mingw-w64-${{matrix.env}}-dlib
+          install: mingw-w64-${{matrix.include.env}}-gcc mingw-w64-${{matrix.include.env}}-dlib
       - name: Verification
         working-directory: src/
         run: go mod verify
