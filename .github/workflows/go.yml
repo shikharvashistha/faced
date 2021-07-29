@@ -26,12 +26,26 @@ jobs:
           go-version: '${{ matrix.go-version }}'
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install Dependencies Ubuntu
+        if: matrix.platform == "ubuntu-latest"
+        run: sudo apt-get install libdlib-dev libblas-dev libatlas-base-dev liblapack-dev libjpeg-turbo8-dev
+      - name: Install Dependencies MacOs
+        if: matrix.platform == "macos-latest"
+        run: brew install dlib      
+      - name: Install Dependencies Windows
+        if: matrix.platform == "windows-latest"
+      - uses: msys2/setup-msys2@v2
+        with:
+         update: true
+         install: >-
+          gcc
+          dlib
       - name: Verification
         working-directory: src/
         run: go mod verify
-   #   - name: Run
-    #    working-directory: src/
-    #    uses:    run: go run main.go
-     # - name: Build
-       # working-directory: src/  2 | #include <dlib/graph_utils.h> kagami repo error
-      #  run: go build main.go
+      - name: Run
+        working-directory: src/
+        run: go run main.go
+      - name: Build
+        working-directory: src/  2 | #include <dlib/graph_utils.h> kagami repo error
+        run: go build main.go
