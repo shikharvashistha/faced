@@ -58,6 +58,7 @@ jobs:
         run: go mod verify
       - name: Pull Packages
         if: matrix.go-version == '1.16.x'
+        working-directory: src/
         run: go get
       - name: Build
         working-directory: src/
