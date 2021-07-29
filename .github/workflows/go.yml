@@ -18,6 +18,11 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
+        include:
+         - { sys: mingw64, env: x86_64 }
+         - { sys: mingw32, env: i686 }
+         - { sys: ucrt64,  env: ucrt-x86_64 }
+         - { sys: clang64, env: clang-x86_64 }
     runs-on: '${{ matrix.platform }}'
     steps:
       - name: Install Go
@@ -38,8 +43,9 @@ jobs:
         if: matrix.platform == 'windows-latest'
         uses: msys2/setup-msys2@v2
         with:
+          msystem: ${{matrix.sys}}
           update: true
-          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-dlib
+          install: mingw-w64-${{matrix.env}}-gcc mingw-w64-${{matrix.env}}-dlib
       - name: Verification
         working-directory: src/
         run: go mod verify
