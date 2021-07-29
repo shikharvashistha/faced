@@ -45,13 +45,10 @@ jobs:
         with:
           msystem: ${{matrix.sys}}
           update: true
-          install: mingw-w64-${{matrix.include.env}}-gcc mingw-w64-${{matrix.include.env}}-dlib
+          install: mingw-w64-${{matrix.env}}-gcc mingw-w64-${{matrix.env}}-dlib
       - name: Verification
         working-directory: src/
         run: go mod verify
-      #- name: Run
-       # working-directory: src/
-       # run: go run main.go
       - name: Build
         working-directory: src/
         run: go build main.go
