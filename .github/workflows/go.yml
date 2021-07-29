@@ -47,5 +47,5 @@ jobs:
         working-directory: src/
         run: go run main.go
       - name: Build
-        working-directory: src/  2 | #include <dlib/graph_utils.h> kagami repo error
+        working-directory: src/  # include <dlib/graph_utils.h> kagami repo error
         run: go build main.go
