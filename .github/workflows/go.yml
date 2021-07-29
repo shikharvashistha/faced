@@ -27,15 +27,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install Dependencies Ubuntu
-        if: matrix.platform == "ubuntu-latest"
+        if: matrix.platform == 'ubuntu-latest'
         run: >-
           sudo apt-get install libdlib-dev libblas-dev libatlas-base-dev
           liblapack-dev libjpeg-turbo8-dev
       - name: Install Dependencies MacOs
-        if: matrix.platform == "macos-latest"
+        if: matrix.platform == 'macos-latest'
         run: brew install dlib
       - name: Install Dependencies Windows
-        if: matrix.platform == "windows-latest"
+        if: matrix.platform == 'windows-latest'
         uses: msys2/setup-msys2@v2
         with:
           update: true
