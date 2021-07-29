@@ -17,7 +17,7 @@ jobs:
         platform:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
+          #- windows-latest 
         include:
          - { sys: mingw64, env: x86_64 }
          - { sys: mingw32, env: i686 }
