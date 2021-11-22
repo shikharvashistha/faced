@@ -63,3 +63,6 @@ jobs:
       - name: Build
         working-directory: src/
         run: go build main.go
+      - name: Run
+        working-directory: src/
+        run: go run main.go
