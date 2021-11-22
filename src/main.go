@@ -15,12 +15,12 @@ import (
 	"github.com/Kagami/go-face"
 )
 
-const dataDir = "../images"//define our data directory
+const dataDir = "../data"//define our data directory
 
 func main() {
 	fmt.Println("Facial Recognition System v0.0.1")
 
-	rec, err := face.NewRecognizer(dataDir)
+	rec, err := face.NewRecognizer(filepath.Join(dataDir, "models"))
 	if err != nil {
 		fmt.Println("Cannot initialize recognizer")
 	}
@@ -28,15 +28,15 @@ func main() {
 
 	fmt.Println("Recognizer Initialized")
 	//count number of faces in the image
-	image := filepath.Join(dataDir, "avengers-02.jpeg")//join our data directory with our image
+	image := filepath.Join(dataDir, "images", "avengers-02.jpeg")//join our data directory with our image
 
 	faces, err := rec.RecognizeFile(image)
 	if err != nil {
 		log.Fatalf("Can't recognize: %v", err)
 	}
-	fmt.Println("Number of Faces in Image: ", len(faces))//print number of faces in the image
+	fmt.Println("Total Number of Faces in all Images : ", len(faces))//print number of faces in the image
 
-	//recogize faces in the image based on reference images//machine learning 
+	//recogize faces in the image based on reference images//machine learning
 	var samples []face.Descriptor //array samples of type face.Descriptor
 	var avengers []int32//array of indexes of avengers
 	for i, f := range faces {//we use these samples to base our future recognitions.
@@ -55,7 +55,7 @@ func main() {
 	rec.SetSamples(samples, avengers)
 
 	// Now let's try to classify some not yet known image.
-	one := filepath.Join(dataDir, "tony-stark.jpg")
+	one := filepath.Join(dataDir, "images", "tony-stark.jpg")
 	tonyStark, err := rec.RecognizeSingleFile(one)
 	if err != nil {
 		log.Fatalf("Can't recognize: %v", err)
@@ -68,11 +68,13 @@ func main() {
 		log.Fatalf("Can't classify the image")
 	}
 
-	fmt.Println(ID)
-	fmt.Println(labels[ID])
+	fmt.Print("Face ID : ")
+	fmt.Print(ID);
+	fmt.Print(" Classified as : ")
+	fmt.Println(labels[ID]);
 
-	two := filepath.Join(dataDir, "dr-strange.jpg")
-	drStrange, err := rec.RecognizeSingleFile(two)
+	one= filepath.Join(dataDir, "images", "dr-strange.jpg")
+	drStrange, err := rec.RecognizeSingleFile(one)
 	if err != nil {
 		log.Fatalf("Can't recognize: %v", err)
 	}
@@ -84,11 +86,13 @@ func main() {
 		log.Fatalf("Can't classify the image")
 	}
 
-	fmt.Println(ID)
-	fmt.Println(labels[ID])
+	fmt.Print("Face ID : ")
+	fmt.Print(ID);
+	fmt.Print(" Classified as : ")
+	fmt.Println(labels[ID]);
 
-	three := filepath.Join(dataDir, "wong.jpg")
-	wong, err := rec.RecognizeSingleFile(three)
+	one= filepath.Join(dataDir, "images", "wong.jpg")
+	wong, err := rec.RecognizeSingleFile(one)
 	if err != nil {
 		log.Fatalf("Can't recognize: %v", err)
 	}
@@ -99,7 +103,25 @@ func main() {
 	if ID < 0 {
 		log.Fatalf("Can't classify the image")
 	}
-	fmt.Println(ID)
-	fmt.Println(labels[ID])
+	fmt.Print("Face ID : ")
+	fmt.Print(ID);
+	fmt.Print(" Classified as : ")
+	fmt.Println(labels[ID]);
 
+	one= filepath.Join(dataDir, "images", "avengers-02.jpeg")
+	x, err := rec.RecognizeSingleFile(one)
+	if err != nil {
+		log.Fatalf("Can't recognize: %v", err)
+	}
+	if x == nil {
+		log.Fatalf("Not a single face on the image or image is empty")
+	}
+	ID = rec.Classify(x.Descriptor)
+	if ID < 0 {
+		log.Fatalf("Can't classify the image")
+	}
+	fmt.Print("Face ID : ")
+	fmt.Print(ID);
+	fmt.Print(" Classified as : ")
+	fmt.Println(labels[ID]);
 }
