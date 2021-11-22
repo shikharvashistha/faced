@@ -108,20 +108,20 @@ func main() {
 	fmt.Print(" Classified as : ")
 	fmt.Println(labels[ID]);
 
-	one= filepath.Join(dataDir, "images", "avengers-02.jpeg")
-	x, err := rec.RecognizeSingleFile(one)
-	if err != nil {
-		log.Fatalf("Can't recognize: %v", err)
-	}
-	if x == nil {
-		log.Fatalf("Not a single face on the image or image is empty")
-	}
-	ID = rec.Classify(x.Descriptor)
-	if ID < 0 {
-		log.Fatalf("Can't classify the image")
-	}
-	fmt.Print("Face ID : ")
-	fmt.Print(ID);
-	fmt.Print(" Classified as : ")
-	fmt.Println(labels[ID]);
+// 	one= filepath.Join(dataDir, "images", "avengers-02.jpeg")
+// 	x, err := rec.RecognizeSingleFile(one)
+// 	if err != nil {
+// 		log.Fatalf("Can't recognize: %v", err)
+// 	}
+// 	if x == nil {
+// 		log.Fatalf("Not a single face on the image or image is empty")
+// 	}
+// 	ID = rec.Classify(x.Descriptor)
+// 	if ID < 0 {
+// 		log.Fatalf("Can't classify the image")
+// 	}
+// 	fmt.Print("Face ID : ")
+// 	fmt.Print(ID);
+// 	fmt.Print(" Classified as : ")
+// 	fmt.Println(labels[ID]);
 }
